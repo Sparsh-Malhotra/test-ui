@@ -57,7 +57,7 @@ const FeedbackCard = () => (
 
         <div className="mt-4">
           <p className="text-2xl font-bold text-primary sm:text-3xl">
-            Stayin' Alive
+            Stayin Alive
           </p>
 
           <p className="mt-4 leading-relaxed text-gray-700">
@@ -92,7 +92,7 @@ const Testimonials = () => {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
         <div className="max-w-xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-400 sm:text-4xl">
-            Don't just take our word for it...
+            Don&apos;t just take our word for it...
           </h2>
 
           <p className="mt-4 text-gray-500">
