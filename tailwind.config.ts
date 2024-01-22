@@ -8,10 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "rgb(52, 172, 188)",
+        "dark-1": "rgb(31, 31, 31)",
+        "hero-bgcolor": "rgba(13, 42, 53, 0.7)",
+        "feedback-bg": "#1C1C21",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        hero: "url(/assets/hero-img.png)",
       },
     },
   },
