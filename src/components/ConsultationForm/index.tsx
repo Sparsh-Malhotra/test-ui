@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { formSteps } from "@/constants";
 import ContactDetailsForm from "./ContactDetailsForm";
 import PersonalDetailsForm from "./PersonalDetailsForm";
@@ -8,13 +8,17 @@ import ChiefComplaintForm from "./ChiefComplaintForm";
 import ExperienceForm from "./ExperienceForm";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { IFormResponse } from "@/models/formResponse";
+import { LoadingContext } from "@/context/loading";
+import { DoctorsContext } from "@/context/doctors";
+import { useSearchParams } from "next/navigation";
 
 const ConsultationForm = () => {
+  const city = useSearchParams().get("city") || "";
   const form = useForm<IFormResponse>({
     defaultValues: {
       age: "",
       chiefComplaints: "",
-      city: "",
+      city: city,
       company: "",
       hasPreviousExperience: "no",
       name: "",
@@ -25,6 +29,9 @@ const ConsultationForm = () => {
   const formRef = useRef(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [lastStep, setLastStep] = useState(formSteps.length - 1);
+
+  const loadingCtx = useContext(LoadingContext);
+  const doctorsCtx = useContext(DoctorsContext);
 
   const handleButtonClick = (incrementor: number) => {
     setCurrentStep((prev) => prev + incrementor);
@@ -45,22 +52,36 @@ const ConsultationForm = () => {
     }
   };
 
-  const handleSubmitForm: SubmitHandler<IFormResponse> = (data) => {
-    console.log(data);
+  const handleSubmitForm: SubmitHandler<IFormResponse> = async (data) => {
+    try {
+      loadingCtx?.setLoading(true);
+      const params = new URLSearchParams({ ...data });
+      const res = await fetch("/api/doctors?" + params.toString(), {
+        method: "GET",
+      });
+      const { doctors } = await res.json();
+      doctorsCtx?.setDoctors(doctors);
+    } catch (err) {
+      alert(err);
+      doctorsCtx?.setDoctors([]);
+    } finally {
+      loadingCtx?.setLoading(false);
+    }
   };
 
   const { handleSubmit, watch } = form;
 
   useEffect(() => {
-    if (parseInt(watch("age")) > 40) {
-      setLastStep(2);
+    if (!isNaN(parseInt(watch("age")))) {
+      if (parseInt(watch("age")) < 40) setLastStep(2);
+      else setLastStep(3);
     }
   }, [watch("age")]);
 
   return (
     <div
       id="form"
-      className="flex flex-col items-center bg-form-bg px-4 py-12 gap-y-6 min-h-[70vh] sm:px-6 lg:me-0 lg:py-8 lg:pe-0 lg:ps-8 xl:py-8"
+      className="flex flex-col items-center bg-form-bg px-4 py-12 gap-y-6 min-h-[65vh] sm:px-6 lg:me-0 lg:py-8 lg:pe-0 lg:ps-8 xl:py-8"
     >
       <p className="text-2xl text-gray-300 font-semibold">Consultation Form</p>
       <form
