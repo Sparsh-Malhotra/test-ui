@@ -88,7 +88,7 @@ const Testimonials = () => {
   const totalTestimonials = testimonialArray.length;
 
   return (
-    <section className="mx-auto px-4 py-12 bg-dark-1 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+    <section className="mx-auto px-4 py-12 bg-dark-1 sm:px-6 lg:me-0 lg:py-8 lg:pe-0 lg:ps-8 xl:py-16">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
         <div className="max-w-xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-400 sm:text-4xl">

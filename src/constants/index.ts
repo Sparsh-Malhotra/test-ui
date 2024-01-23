@@ -82,3 +82,10 @@ export const testimonialArray: ITestimonial[] = [
     occupation: "Business Owner",
   },
 ];
+
+export const formSteps = [
+  "Contact Details",
+  "Personal Details",
+  "Chief Complaints",
+  "Previous Experience",
+];
