@@ -3,7 +3,7 @@
 import { DoctorsContext } from "@/context/doctors";
 import { LoadingContext } from "@/context/loading";
 import { IDoctor } from "@/models/doctor";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 const DoctorCard = ({ doctor }: { doctor: IDoctor }) => (
   <div className="flex items-center justify-between w-full rounded-lg border px-4 py-3 border-white cursor-pointer">
@@ -54,12 +54,19 @@ const DoctorsList = () => {
   const loadingCtx = useContext(LoadingContext);
   const doctorsCtx = useContext(DoctorsContext);
 
-  console.log(doctorsCtx?.doctors);
+  const doctorsListRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    doctorsListRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [doctorsCtx?.doctors]);
 
   if (!doctorsCtx?.doctors) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center gap-6 bg-dark-1 px-4 py-12 gap-y-6 sm:px-6 lg:me-0 lg:py-8 lg:ps-8 xl:py-8">
+    <div
+      ref={doctorsListRef}
+      className="flex flex-col items-center justify-center gap-6 bg-dark-1 px-4 py-12 gap-y-6 sm:px-6 lg:me-0 lg:py-8 lg:ps-8 xl:py-8"
+    >
       <p className="text-2xl text-gray-300 font-semibold">Available Doctors</p>
       {!!loadingCtx?.loading && (
         <svg
@@ -82,9 +89,15 @@ const DoctorsList = () => {
           </path>
         </svg>
       )}
-      {doctorsCtx?.doctors?.length
-        ? doctorsCtx.doctors.map((doctor) => <DoctorCard doctor={doctor} />)
-        : "No Doctors available for consulation right now"}
+      {doctorsCtx?.doctors?.length ? (
+        doctorsCtx.doctors.map((doctor) => (
+          <DoctorCard key={doctor.id} doctor={doctor} />
+        ))
+      ) : (
+        <p className="text-white">
+          No Doctors available for consultation right now!!
+        </p>
+      )}
     </div>
   );
 };

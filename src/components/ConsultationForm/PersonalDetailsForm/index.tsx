@@ -14,6 +14,7 @@ const PersonalDetailsForm = ({ form }: IFormProps) => {
         <div className="flex">
           <input
             type="number"
+            required
             id="age"
             className="rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Enter Age"
@@ -44,6 +45,7 @@ const PersonalDetailsForm = ({ form }: IFormProps) => {
           </span>
           <input
             type="text"
+            required
             id="city"
             className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Enter City"
@@ -75,6 +77,7 @@ const PersonalDetailsForm = ({ form }: IFormProps) => {
           </span>
           <input
             type="text"
+            required
             id="company"
             className="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Enter Company Name"

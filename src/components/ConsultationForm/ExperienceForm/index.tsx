@@ -2,7 +2,6 @@ import { IFormProps } from "@/models/formResponse";
 
 const ExperienceForm = ({ form }: IFormProps) => {
   const { setValue, watch } = form;
-  console.log(watch("hasPreviousExperience"));
 
   return (
     <div className="flex items-center justify-between">

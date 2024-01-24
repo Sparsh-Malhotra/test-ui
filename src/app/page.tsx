@@ -34,7 +34,6 @@ export default function Home() {
               <li>
                 <Link
                   href="#form"
-                  scroll={false}
                   className="text-white font-semibold text-sm rounded-md bg-primary px-2 py-2"
                 >
                   Book Now
@@ -54,7 +53,6 @@ export default function Home() {
               </p>
               <Link
                 href="#form"
-                scroll={false}
                 className="bg-primary rounded-md text-white py-2 w-1/4 font-semibold text-center"
               >
                 Book Appointment
