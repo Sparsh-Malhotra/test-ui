@@ -76,7 +76,7 @@ const ConsultationForm = () => {
       if (parseInt(watch("age")) < 40) setLastStep(2);
       else setLastStep(3);
     }
-  }, [watch("age")]);
+  }, [watch, watch("age")]);
 
   return (
     <div
